@@ -91,6 +91,7 @@ def search_by_category():
     
     # Display search results
     display_search_results(recipes)
+
 def display_search_results(recipes):
     """Display search results."""
     if recipes:
