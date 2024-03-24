@@ -5,10 +5,10 @@ from modules import engine, Category, Recipe, Ingredient, Instruction, Base, ses
 
 # Create all tables in the engine. This is equivalent to "Create Table"
 # statements in raw SQL.
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)
 
-#Base.metadata.drop_all(engine)
-#Base.metadata.create_all(engine)
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 
 def seed_database():
     # Seed categories
@@ -18,9 +18,10 @@ def seed_database():
         session.add(category)
     session.commit()
 
+
     # Seed recipes
     recipes_data = {
-    "Blueberry Muffins": {
+        "Blueberry Muffins": { 
         "category": "Breakfast",
         "total_cooktime": 30.0,  # Cook time in minutes
         "instructions": [
@@ -227,30 +228,29 @@ def seed_database():
         "ingredients": ["Eggs", "Salt", "Pepper", "Butter", "Shredded cheese", "Ham", "Vegetables (e.g., bell peppers, onions, mushrooms)"]
     },
 
-        "Pancakes": {
-            "category": "Breakfast",
-            "instructions": [
-                "Mix flour, eggs, milk, sugar, baking powder, and salt in a bowl.",
-                "Heat a lightly oiled griddle or frying pan over medium-high heat.",
-                "Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake.",
-                "Brown on both sides and serve hot."
-            ],
-            "ingredients": ["Flour", "Eggs", "Milk", "Butter", "Sugar", "Baking powder", "Salt"]
-        },
-        "Spaghetti": {
-            "category": "Dinner",
-            "instructions": [
-                "Bring a large pot of lightly salted water to a boil.",
-                "Cook spaghetti in the boiling water, stirring occasionally until cooked through but firm to the bite, about 12 minutes; drain.",
-                "Heat olive oil in a large skillet over medium heat; cook and stir garlic until lightly browned, about 1 minute.",
-                "Add ground beef, onion, salt, and black pepper; cook and stir until browned and crumbly, 5 to 7 minutes.",
-                "Pour diced tomatoes and tomato sauce into the skillet; season with sugar, Italian seasoning, basil, salt, and pepper.",
-                "Simmer sauce for 10 minutes; add spaghetti and cook, stirring occasionally, until heated through and flavors are blended, about 10 minutes more."
-            ],
-            "ingredients": ["Spaghetti pasta", "Tomato sauce", "Ground beef", "Onion", "Garlic", "Olive oil", "Salt", "Pepper"]
-        },
+    "Pancakes": {
+        "category": "Breakfast",
+        "instructions": [
+            "Mix flour, eggs, milk, sugar, baking powder, and salt in a bowl.",
+            "Heat a lightly oiled griddle or frying pan over medium-high heat.",
+            "Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake.",
+            "Brown on both sides and serve hot."
+        ],
+        "ingredients": ["Flour", "Eggs", "Milk", "Butter", "Sugar", "Baking powder", "Salt"]
     },
-
+    "Spaghetti": {
+        "category": "Dinner",
+        "instructions": [
+            "Bring a large pot of lightly salted water to a boil.",
+            "Cook spaghetti in the boiling water, stirring occasionally until cooked through but firm to the bite, about 12 minutes; drain.",
+            "Heat olive oil in a large skillet over medium heat; cook and stir garlic until lightly browned, about 1 minute.",
+            "Add ground beef, onion, salt, and black pepper; cook and stir until browned and crumbly, 5 to 7 minutes.",
+            "Pour diced tomatoes and tomato sauce into the skillet; season with sugar, Italian seasoning, basil, salt, and pepper.",
+            "Simmer sauce for 10 minutes; add spaghetti and cook, stirring occasionally, until heated through and flavors are blended, about 10 minutes more."
+        ],
+        "ingredients": ["Spaghetti pasta", "Tomato sauce", "Ground beef", "Onion", "Garlic", "Olive oil", "Salt", "Pepper"]
+    }
+}
 
     for recipe_name, recipe_data in recipes_data.items():
         category = session.query(Category).filter_by(name=recipe_data["category"]).first()
